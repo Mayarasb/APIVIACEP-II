@@ -41,6 +41,20 @@ async function inserirUsuario(db, nome, cep, logradouro, bairro, cidade, estado)
   }
 }
 
+//Editar dados
+
+async function atualizarUsuario(db, id, nome, cep, logradouro, bairro, cidade, estado) {
+  try {
+    await db.runAsync(
+      "UPDATE USUARIO SET NOME_US=?, CEP_US=?, LOGRADOURO_US=?, BAIRRO_US=?, CIDADE_US=?, ESTADO_US=? WHERE ID_US=?",
+      nome, cep, logradouro, bairro, cidade, estado, id
+    );
+    console.log('Usuário Atualizado!!!');
+  } catch (error) {
+    console.log('Erro ao atualizar usuário', error);
+  }
+}
+
 // Exibir os dados
 async function selectUsuarios(db) {
   try {
@@ -73,4 +87,4 @@ async function deletaUsuario(db, id) {
   }
 }
 
-export { Banco, createTable, inserirUsuario, selectUsuarios, selectUsuarioId, deletaUsuario };
+export { Banco, createTable, inserirUsuario,  atualizarUsuario, selectUsuarios, selectUsuarioId, deletaUsuario };
